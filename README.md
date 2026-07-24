@@ -57,7 +57,34 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
 <hr>
 <h3>Program:</h3>
 
-<h3>Output:</h3>
+```
+from collections import defaultdict
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+    for neighbour in graph[start]:
+        if not visited[neighbour]:
+            dfs(graph, neighbour,
+                visited, path)
+    return path
+graph = defaultdict(list)
+n, e = map(int, input("Enter the number of nodes and edges: ").split())
+for i in range(e):
+    u, v = input(f"Enter edge {i+1} (u v): ").split()
+    graph[u].append(v)
+    graph[v].append(u)  # If the graph is undirected; remove this line for a directed graph
+if '0' in graph:
+    start = '0'
+else:
+    start = 'A'
+# Starting node
+visited = defaultdict(bool)
+path = []
+traversed_path = dfs(graph, start, visited, path)
+print("DFS Traversal Path:", traversed_path)
+
+```
+
 <h3>Sample Input</h3>
 <hr>
 8 9 <BR>
@@ -77,6 +104,10 @@ F H <BR>
 
 <hr>
 
+<h3>Output:</h3>
+<img width="959" height="315" alt="image" src="https://github.com/user-attachments/assets/9a99bcba-7a7e-49fd-9b35-8bd86c7770c6" />
+
+
 <hr>
 <h3>Sample Input</h3>
 <hr>
@@ -92,6 +123,9 @@ F H <BR>
 ['0', '1', '2', '3', '4']
 
 <hr>
+<h3>Output:</h3>
+<img width="1917" height="442" alt="image" src="https://github.com/user-attachments/assets/1b8d8323-963b-4891-89b2-d87811e9defa" />
+
 <h3>Result:</h3>
 <hr>
 <p>Thus,a Graph was constructed and implementation of Depth First Search for the same graph was done successfully.</p>
